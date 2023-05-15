@@ -1,0 +1,7 @@
+ARG FROM_DIGEST
+FROM localagi/fastchat-controller@${FROM_DIGEST}
+
+EXPOSE $FASTCHAT_CONTROLLER_PORT
+
+ENTRYPOINT python3 -m fastchat.serve.controller 
+CMD ["--host","$FASTCHAT_CONTROLLER_HOST","--port $FASTCHAT_CONTROLLER_PORT"]

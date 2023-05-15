@@ -1,0 +1,48 @@
+name: Publish Docker images on release
+
+on:
+  push:
+  release:
+    types: [published]
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+
+  call-docker-build-fastchat:
+    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
+    with:
+      image-name: ${{ github.repository_owner }}/fastchat
+    secrets: inherit
+
+  call-docker-build-fastchat-controller:
+    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
+    with:
+      image-name: ${{ github.repository_owner }}/fastchat-controller
+      dockerfile: Dockerfile.controller
+      build-args: |
+        FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+    secrets: inherit
+    needs: call-docker-build-fastchat
+
+  call-docker-build-fastchat-worker:
+    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
+    with:
+      image-name: ${{ github.repository_owner }}/fastchat-worker
+      dockerfile: Dockerfile.worker
+      build-args: |
+        FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+    secrets: inherit
+    needs: call-docker-build-fastchat
+
+  call-docker-build-fastchat-api:
+    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
+    with:
+      image-name: ${{ github.repository_owner }}/fastchat-api
+      dockerfile: docker/Dockerfile.api
+      build-args: |
+        FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+    secrets: inherit
+    needs: call-docker-build-fastchat
