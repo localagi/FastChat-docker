@@ -63,7 +63,7 @@ jobs:
         type=schedule
         type=ref,event=branch
         type=semver,pattern={{version}}
-      dockerfile: docker/Dockerfile.api
+      dockerfile: Dockerfile.api
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
     secrets: inherit

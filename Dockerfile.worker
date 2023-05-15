@@ -1,7 +1,7 @@
 ARG FROM_DIGEST
-FROM localagi/fastchat-controller@${FROM_DIGEST}
+FROM localagi/fastchat@${FROM_DIGEST}
 
 EXPOSE $FASTCHAT_WORKER_PORT
 
-python3 -m fastchat.serve.model_worker
+ENTRYPOINT python3 -m fastchat.serve.model_worker
 CMD ["--host","$FASTCHAT_WORKER_HOST","--port","$FASTCHAT_WORKER_PORT","--controller-address","$FASTCHAT_CONTROLLER_ADDRESS","--model-path","$MODEL_PATH","--num-gpus","$FASTCHAT_GPU_COUNT","--device","$FASTCHAT_DEVICE"]

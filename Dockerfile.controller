@@ -1,5 +1,5 @@
 ARG FROM_DIGEST
-FROM localagi/fastchat-controller@${FROM_DIGEST}
+FROM localagi/fastchat@${FROM_DIGEST}
 
 EXPOSE $FASTCHAT_CONTROLLER_PORT
 
