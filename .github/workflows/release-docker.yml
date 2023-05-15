@@ -1,9 +1,9 @@
 name: Publish Docker images on release
 
 on:
-  push:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   packages: write
