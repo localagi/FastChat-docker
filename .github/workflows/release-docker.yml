@@ -14,6 +14,7 @@ jobs:
   call-docker-build-fastchat:
     uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
     with:
+      registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat
       build-args:
         FASTCHAT_VERSION=${{ github.ref_name }}
@@ -22,6 +23,7 @@ jobs:
   call-docker-build-fastchat-controller:
     uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
     with:
+      registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-controller
       dockerfile: Dockerfile.controller
       build-args: |
@@ -32,6 +34,7 @@ jobs:
   call-docker-build-fastchat-worker:
     uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
     with:
+      registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-worker
       dockerfile: Dockerfile.worker
       build-args: |
@@ -42,6 +45,7 @@ jobs:
   call-docker-build-fastchat-api:
     uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
     with:
+      registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-api
       dockerfile: docker/Dockerfile.api
       build-args: |
