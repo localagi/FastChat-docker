@@ -6,9 +6,8 @@ RUN apt-get update ; \
 
 RUN pip3 install --upgrade pip
 
-$ git clone <repository> .
 ARG FASTCHAT_VERSION=main
-RUN git clone -b $FASTCHAT_VERSION --depth 1 https://github.com/lm-sys/FastChat fastchat
+RUN git clone -b ${ FASTCHAT_VERSION } --depth 1 https://github.com/lm-sys/FastChat fastchat
 
 WORKDIR /fastchat
 RUN pip3 install .
