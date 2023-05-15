@@ -1,4 +1,4 @@
-name: Publish Docker images on release
+name: Publish Docker images
 
 on:
   release:
@@ -16,7 +16,7 @@ jobs:
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat
-      build-args:
+      build-args: |
         FASTCHAT_VERSION=${{ github.ref_name }}
     secrets: inherit
 

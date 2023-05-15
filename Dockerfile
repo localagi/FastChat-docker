@@ -1,5 +1,7 @@
 FROM nvidia/cuda:12.0.0-cudnn8-runtime-ubuntu22.04
 
+ARG FASTCHAT_VERSION="main"
+
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update ; \
     apt-get upgrade -y ; \
@@ -7,8 +9,8 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 RUN pip3 install --upgrade pip
 
-ARG FASTCHAT_VERSION=main
-RUN git clone -b ${ FASTCHAT_VERSION } --depth 1 https://github.com/lm-sys/FastChat fastchat
+
+RUN git clone -b "$FASTCHAT_VERSION" --depth 1 https://github.com/lm-sys/FastChat fastchat
 
 WORKDIR /fastchat
 RUN pip3 install .
