@@ -16,6 +16,10 @@ jobs:
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat
+      tags: |
+        type=schedule
+        type=ref,event=branch
+        type=semver,pattern={{version}}
       build-args: |
         FASTCHAT_VERSION=${{ github.ref_name }}
     secrets: inherit
@@ -25,6 +29,10 @@ jobs:
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-controller
+      tags: |
+        type=schedule
+        type=ref,event=branch
+        type=semver,pattern={{version}}
       dockerfile: Dockerfile.controller
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
@@ -36,6 +44,10 @@ jobs:
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-worker
+      tags: |
+        type=schedule
+        type=ref,event=branch
+        type=semver,pattern={{version}}
       dockerfile: Dockerfile.worker
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
@@ -47,6 +59,10 @@ jobs:
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-api
+      tags: |
+        type=schedule
+        type=ref,event=branch
+        type=semver,pattern={{version}}
       dockerfile: docker/Dockerfile.api
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
