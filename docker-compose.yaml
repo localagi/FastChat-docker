@@ -2,14 +2,14 @@ version: "3.8"
 services:
 
   fastchat-controller:
-    image: localagi/fastchat-controller
+    image: localagi/fastchat-controller:${FASTCHAT_VERSION:-main}
     environment:
       FASTCHAT_CONTROLLER_HOST: "0.0.0.0"
     ports:
       - 21001
 
   fastchat-worker:
-    image: localagi/fastchat-worker
+    image: localagi/fastchat-worker:${FASTCHAT_VERSION:-main}
     environment:
       FASTCHAT_CONTROLLER_HOST: fastchat-controller
       FASTCHAT_DEVICE: "cpu"
@@ -32,7 +32,7 @@ services:
       - fastchat-controller
       
   fastchat-api:
-    image: localagi/fastchat-api
+    image: localagi/fastchat-api:${FASTCHAT_VERSION:-main}
     environment:
       FASTCHAT_CONTROLLER_HOST: fastchat-controller
     ports:
