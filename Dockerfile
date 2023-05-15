@@ -1,6 +1,7 @@
 FROM nvidia/cuda:12.0.0-cudnn8-runtime-ubuntu22.04
 
-RUN apt-get update ; \
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update ; \
     apt-get upgrade -y ; \
     apt-get install -y git python3-dev python3-pip
 
