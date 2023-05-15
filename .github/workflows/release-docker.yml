@@ -12,7 +12,7 @@ permissions:
 jobs:
 
   call-docker-build-fastchat:
-    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@container_optimization
+    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@main
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat
