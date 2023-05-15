@@ -2,16 +2,14 @@ version: "3.8"
 services:
 
   fastchat-controller:
-    name: fastchat-controller
+    image: localagi/fastchat-controller
     environment:
-      FASTCHAT_DEVICE: "cpu"
-      MODEL_PATH: "/model/vicuna-7b-1.1"
-      # or to use another model:
-      # MODEL_PATH: "/model/fastchat-t5-3b-v1.0"
+      FASTCHAT_CONTROLLER_HOST: "0.0.0.0"
     ports:
       - 21001
 
   fastchat-worker:
+    image: localagi/fastchat-worker
     environment:
       FASTCHAT_CONTROLLER_HOST: fastchat-controller
       FASTCHAT_DEVICE: "cpu"
@@ -34,8 +32,7 @@ services:
       - fastchat-controller
       
   fastchat-api:
-    localagi/
-    name: fastchat-controller
+    image: localagi/fastchat-api
     environment:
       FASTCHAT_CONTROLLER_HOST: fastchat-controller
     ports:
