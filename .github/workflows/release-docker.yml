@@ -12,7 +12,7 @@ permissions:
 jobs:
 
   call-docker-build-fastchat:
-    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat
@@ -26,7 +26,7 @@ jobs:
     secrets: inherit
 
   call-docker-build-fastchat-controller:
-    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-controller
@@ -42,7 +42,7 @@ jobs:
     needs: call-docker-build-fastchat
 
   call-docker-build-fastchat-worker:
-    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-worker
@@ -58,7 +58,7 @@ jobs:
     needs: call-docker-build-fastchat
 
   call-docker-build-fastchat-api:
-    uses: localagi/Agent-LLM/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
       registry-github: false
       image-name: ${{ github.repository_owner }}/fastchat-api
