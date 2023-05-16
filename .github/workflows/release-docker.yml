@@ -36,7 +36,7 @@ jobs:
         type=semver,pattern={{version}}
       dockerfile: Dockerfile.controller
       build-args: |
-        FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+        FROM_IMAGE=${{needs.call-docker-build-fastchat.outputs.primary-image}}@${{needs.call-docker-build-fastchat.outputs.digest}}
       registry-readme: README-docker.md
     secrets: inherit
     needs: call-docker-build-fastchat
@@ -52,7 +52,7 @@ jobs:
         type=semver,pattern={{version}}
       dockerfile: Dockerfile.worker
       build-args: |
-        FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+        FROM_IMAGE=${{needs.call-docker-build-fastchat.outputs.primary-image}}@${{needs.call-docker-build-fastchat.outputs.digest}}
       registry-readme: README-docker.md
     secrets: inherit
     needs: call-docker-build-fastchat
@@ -68,7 +68,7 @@ jobs:
         type=semver,pattern={{version}}
       dockerfile: Dockerfile.api
       build-args: |
-        FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+        FROM_IMAGE=${{needs.call-docker-build-fastchat.outputs.primary-image}}@${{needs.call-docker-build-fastchat.outputs.digest}}
       registry-readme: README-docker.md
     secrets: inherit
     needs: call-docker-build-fastchat
