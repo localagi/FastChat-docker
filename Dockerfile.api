@@ -3,5 +3,5 @@ FROM localagi/fastchat@${FROM_DIGEST}
 
 EXPOSE $FASTCHAT_API_PORT
 
-ENTRYPOINT python3 -m fastchat.serve.openai_api_server
+ENTRYPOINT entrypoint.sh fastchat.serve.openai_api_server
 CMD ["--host","$FASTCHAT_API_HOST","--port","$FASTCHAT_API_PORT","--controller-address","$FASTCHAT_CONTROLLER_ADDRESS"]
