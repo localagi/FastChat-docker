@@ -5,8 +5,6 @@ services:
     image: localagi/fastchat-controller:${FASTCHAT_VERSION:-main}
     environment:
       FASTCHAT_CONTROLLER_HOST: "0.0.0.0"
-    ports:
-      - 21001
 
   fastchat-worker:
     image: localagi/fastchat-worker:${FASTCHAT_VERSION:-main}
@@ -16,8 +14,6 @@ services:
       MODEL_PATH: "/models/vicuna-7b-1.1"
       # or to use another model:
       # MODEL_PATH: "/model/fastchat-t5-3b-v1.0"
-    ports:
-      - "21002"
     volumes:
       - /local/path/to/models:/models
     deploy:
@@ -36,6 +32,6 @@ services:
     environment:
       FASTCHAT_CONTROLLER_HOST: fastchat-controller
     ports:
-      - "127.0.0.1:7500:7500"
+      - "7500:7500"
     depends_on:
       - fastchat-controller      
