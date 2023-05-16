@@ -16,8 +16,8 @@ jobs:
   call-docker-build-fastchat:
     uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
-      registry-github: false
-      image-name: ${{ github.repository_owner }}/fastchat
+      registry-github-enable: false
+      registry-repo-name: fastchat
       tags: |
         type=schedule
         type=ref,event=branch
@@ -30,8 +30,8 @@ jobs:
   call-docker-build-fastchat-controller:
     uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
-      registry-github: false
-      image-name: ${{ github.repository_owner }}/fastchat-controller
+      registry-github-enable: false
+      registry-repo-name: fastchat-controller
       tags: |
         type=schedule
         type=ref,event=branch
@@ -46,8 +46,8 @@ jobs:
   call-docker-build-fastchat-worker:
     uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
-      registry-github: false
-      image-name: ${{ github.repository_owner }}/fastchat-worker
+      registry-github-enable: false
+      registry-repo-name: fastchat-worker
       tags: |
         type=schedule
         type=ref,event=branch
@@ -62,8 +62,8 @@ jobs:
   call-docker-build-fastchat-api:
     uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
     with:
-      registry-github: false
-      image-name: ${{ github.repository_owner }}/fastchat-api
+      registry-github-enable: false
+      registry-repo-name: fastchat-api
       tags: |
         type=schedule
         type=ref,event=branch
