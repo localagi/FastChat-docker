@@ -22,6 +22,7 @@ jobs:
         type=semver,pattern={{version}}
       build-args: |
         FASTCHAT_VERSION=${{ github.ref_name }}
+      registry-readme: README-docker.md
     secrets: inherit
 
   call-docker-build-fastchat-controller:
@@ -36,6 +37,7 @@ jobs:
       dockerfile: Dockerfile.controller
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+      registry-readme: README-docker.md
     secrets: inherit
     needs: call-docker-build-fastchat
 
@@ -51,6 +53,7 @@ jobs:
       dockerfile: Dockerfile.worker
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+      registry-readme: README-docker.md
     secrets: inherit
     needs: call-docker-build-fastchat
 
@@ -66,5 +69,6 @@ jobs:
       dockerfile: Dockerfile.api
       build-args: |
         FROM_DIGEST=${{needs.call-docker-build-fastchat.outputs.digest}}
+      registry-readme: README-docker.md
     secrets: inherit
     needs: call-docker-build-fastchat
