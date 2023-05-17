@@ -9,7 +9,7 @@ services:
   fastchat-worker:
     image: localagi/fastchat-worker:${FASTCHAT_VERSION:-main}
     environment:
-      FASTCHAT_CONTROLLER_HOST: fastchat-controller
+      FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
       FASTCHAT_DEVICE: "cpu"
       MODEL_PATH: lmsys/fastchat-t5-3b-v1.0 
       # or to use another model:
@@ -30,7 +30,7 @@ services:
   fastchat-api:
     image: localagi/fastchat-api:${FASTCHAT_VERSION:-main}
     environment:
-      FASTCHAT_CONTROLLER_HOST: fastchat-controller
+      FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
     ports:
       - "7500:7500"
     depends_on:
@@ -39,7 +39,8 @@ services:
   fastchat-gradio:
     image: localagi/fastchat-gradio:${FASTCHAT_VERSION:-main}
     environment:
-      FASTCHAT_CONTROLLER_HOST: fastchat-controller
+      FASTCHAT_GRADIO_HOST: 0.0.0.0
+      FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
     ports:
       - "3000:3000"
     depends_on:
