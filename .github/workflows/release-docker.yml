@@ -78,3 +78,20 @@ jobs:
       platforms: linux/amd64,linux/arm64/v8
     secrets: inherit
     needs: call-docker-build-fastchat
+    
+  call-docker-build-fastchat-gradio:
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
+    with:
+      registry-github-enable: false
+      registry-repo-name: fastchat-gradio
+      tags: |
+        type=schedule
+        type=ref,event=branch
+        type=semver,pattern={{version}}
+      dockerfile: Dockerfile.gradio
+      build-args: |
+        FROM_IMAGE=${{ needs.call-docker-build-fastchat.outputs.primary-image }}
+      registry-readme: README-docker.md
+      platforms: linux/amd64,linux/arm64/v8
+    secrets: inherit
+    needs: call-docker-build-fastchat

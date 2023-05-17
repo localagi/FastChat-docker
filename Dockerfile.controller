@@ -4,4 +4,4 @@ FROM ${FROM_IMAGE}
 EXPOSE $FASTCHAT_CONTROLLER_PORT
 
 ENTRYPOINT ["/fastchat/entrypoint.sh", "fastchat.serve.controller"]
-CMD ["--host","$FASTCHAT_CONTROLLER_HOST","--port $FASTCHAT_CONTROLLER_PORT"]
+CMD ["--host","${FASTCHAT_CONTROLLER_HOST}","--port","${FASTCHAT_CONTROLLER_PORT}"]

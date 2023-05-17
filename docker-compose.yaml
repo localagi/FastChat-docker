@@ -11,7 +11,7 @@ services:
     environment:
       FASTCHAT_CONTROLLER_HOST: fastchat-controller
       FASTCHAT_DEVICE: "cpu"
-      MODEL_PATH: "/models/vicuna-7b-1.1"
+      MODEL_PATH: lmsys/fastchat-t5-3b-v1.0 
       # or to use another model:
       # MODEL_PATH: "/model/fastchat-t5-3b-v1.0"
     volumes:
@@ -34,4 +34,13 @@ services:
     ports:
       - "7500:7500"
     depends_on:
-      - fastchat-controller      
+      - fastchat-controller
+
+  fastchat-gradio:
+    image: localagi/fastchat-gradio:${FASTCHAT_VERSION:-main}
+    environment:
+      FASTCHAT_CONTROLLER_HOST: fastchat-controller
+    ports:
+      - "3000:3000"
+    depends_on:
+      - fastchat-controller   
