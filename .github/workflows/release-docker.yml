@@ -14,7 +14,7 @@ permissions:
 jobs:
 
   call-docker-build-fastchat:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
     with:
       registry-github-enable: false
       registry-repo-name: fastchat
@@ -28,7 +28,7 @@ jobs:
     secrets: inherit
 
   call-docker-build-fastchat-controller:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
     with:
       registry-github-enable: false
       registry-repo-name: fastchat-controller
@@ -44,7 +44,7 @@ jobs:
     needs: call-docker-build-fastchat
 
   call-docker-build-fastchat-worker:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
     with:
       registry-github-enable: false
       registry-repo-name: fastchat-worker
@@ -60,7 +60,7 @@ jobs:
     needs: call-docker-build-fastchat
 
   call-docker-build-fastchat-api:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@main
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
     with:
       registry-github-enable: false
       registry-repo-name: fastchat-api
