@@ -9,12 +9,12 @@ services:
   fastchat-worker:
     image: localagi/fastchat-worker:${FASTCHAT_VERSION:-main}
     environment:
+      FASTCHAT_WORKER_ADDRESS: http://fastchat-worker:21002
       FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
       FASTCHAT_DEVICE: "cpu"
       MODEL_PATH: lmsys/fastchat-t5-3b-v1.0 
       # or to use a local model:
       # MODEL_PATH: "/models/fastchat-t5-3b-v1.0"
-      FASTCHAT_WORKER_ADDRESS: http://fastchat-worker:21002
   ## use volumes to mount local models and use MODEL_PATH to provide an absolute path from internal /models      
   # volumes:
   #   - /path/to/local/models:/models
