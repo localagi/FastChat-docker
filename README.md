@@ -1,22 +1,24 @@
-# fastchat-docker
-Docker builds for https://github.com/lm-sys/FastChat/tags
+# FastChat-docker
+Sophisticated docker builds for [lm-sys/FastChat](https://github.com/lm-sys/FastChat). Runs in 1 step with out-of-the-box model download. Tweakable. Scaleable.
+Supports multiplatform `amd64`, `arm64`
 
+**Supported versions:**
 * main (default)
 * 0.2.9
 * 0.2.5
 
 See [Releases](https://github.com/localagi/FastChat-docker/releases)
 
-## NVIDIA only
-docker-compose requires `nvidia-container-toolkit` and reboot
 
+## Running
+##### NVIDIA card required
+These containers require `nvidia-container-toolkit` and reboot
 
-## running
-### 1-click
+### "1-click"-Setup
 The following wil get all fastchat images and fastchat's default model on startup.
 
 * get `docker-compose.yml` (clone, copy or else) 
-* `docker compose up`
+* Run `docker compose up`
 * wait for model download (~7GB)
 * open/refresh `http://localhost:3000` 
 
