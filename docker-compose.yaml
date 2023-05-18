@@ -42,6 +42,7 @@ services:
     environment:
       FASTCHAT_GRADIO_HOST: 0.0.0.0
       FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
+      FASTCHAT_GRADIO_MODEL_LIST_MODE: reload
     ports:
       - "3000:3000"
     depends_on:

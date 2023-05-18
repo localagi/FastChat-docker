@@ -4,4 +4,4 @@ FROM ${FROM_IMAGE}
 EXPOSE $FASTCHAT_GRADIO_PORT
 
 ENTRYPOINT ["/fastchat/entrypoint.sh", "fastchat.serve.gradio_web_server"]
-CMD ["--host","${FASTCHAT_GRADIO_HOST}","--port","${FASTCHAT_GRADIO_PORT}","--controller-url","${FASTCHAT_CONTROLLER_ADDRESS}"]
+CMD ["--host","${FASTCHAT_GRADIO_HOST}","--port","${FASTCHAT_GRADIO_PORT}","--controller-url","${FASTCHAT_CONTROLLER_ADDRESS}","--model-list-mode","${FASTCHAT_GRADIO_MODEL_LIST_MODE}"]
