@@ -9,6 +9,7 @@ services:
   fastchat-worker:
     image: localagi/fastchat-worker:${FASTCHAT_VERSION:-main}
     environment:
+      FASTCHAT_WORKER_HOST: "0.0.0.0"
       FASTCHAT_WORKER_ADDRESS: http://fastchat-worker:21002
       FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
       FASTCHAT_DEVICE: "cpu"
