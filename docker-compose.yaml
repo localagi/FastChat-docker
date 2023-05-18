@@ -14,6 +14,7 @@ services:
       MODEL_PATH: lmsys/fastchat-t5-3b-v1.0 
       # or to use another model:
       # MODEL_PATH: "/model/fastchat-t5-3b-v1.0"
+      FASTCHAT_WORKER_ADDRESS: http://fastchat-worker:21002
     volumes:
       - /local/path/to/models:/models
     deploy:
