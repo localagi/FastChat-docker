@@ -1,7 +1,7 @@
 # FastChat-docker
 Sophisticated docker builds for parent project [lm-sys/FastChat](https://github.com/lm-sys/FastChat). 
 
-![example workflow](https://github.com/localagi/FastChat-docker/actions/workflows/publish-docker.yml/badge.svg)
+![example workflow](https://github.com/localagi/FastChat-docker/actions/workflows/publish-docker.yml/badge.svg?branch=main)
 
 Easy setup. Compatible. Tweakable. Scaleable.
 
