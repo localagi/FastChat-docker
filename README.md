@@ -11,7 +11,7 @@ Easy setup. Compatible. Tweakable. Scaleable.
 #### Supported versions
 Containers follow the version scheme of the parent project
 
-`main` (default), `0.2.9`, `0.2.5`, etc.
+`main` (default), `v0.2.9`, `v0.2.5`, etc.
 
 See [Releases](../../releases)
 
@@ -36,7 +36,7 @@ The following wil get all im
 [] TODO Environment variables to set for the specific service
 
 #### version selection `FASTCHAT_VERSION`
-Prepend, e.g. `FASTCHAT_VERSION=0.2.9`
+Prepend, e.g. `FASTCHAT_VERSION=v0.2.9`
 
 ### Get the latest builds / update
 `docker compose pull`
