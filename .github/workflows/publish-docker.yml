@@ -1,8 +1,6 @@
 name: Publish Docker images
 
 on:
-  push:
-    branches: [main]
   release:
     types: [published]
   workflow_dispatch:
@@ -14,7 +12,7 @@ permissions:
 jobs:
 
   call-docker-build-fastchat:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
+    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v3
     with:
       registry-github-enable: false
       registry-repo-name: fastchat
@@ -24,74 +22,5 @@ jobs:
         type=semver,pattern={{version}}
       build-args: |
         FASTCHAT_VERSION=${{ github.ref_name }}
-      registry-readme: README-docker.md
       platforms: linux/amd64,linux/arm64/v8
     secrets: inherit
-
-  call-docker-build-fastchat-controller:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
-    with:
-      registry-github-enable: false
-      registry-repo-name: fastchat-controller
-      tags: |
-        type=schedule
-        type=ref,event=branch
-        type=semver,pattern={{version}}
-      dockerfile: Dockerfile.controller
-      build-args: |
-        FROM_IMAGE=${{ needs.call-docker-build-fastchat.outputs.primary-image }}
-      registry-readme: README-docker.md
-      platforms: linux/amd64,linux/arm64/v8
-    secrets: inherit
-    needs: call-docker-build-fastchat
-
-  call-docker-build-fastchat-worker:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
-    with:
-      registry-github-enable: false
-      registry-repo-name: fastchat-worker
-      tags: |
-        type=schedule
-        type=ref,event=branch
-        type=semver,pattern={{version}}
-      dockerfile: Dockerfile.worker
-      build-args: |
-        FROM_IMAGE=${{ needs.call-docker-build-fastchat.outputs.primary-image }}
-      registry-readme: README-docker.md
-      platforms: linux/amd64,linux/arm64/v8
-    secrets: inherit
-    needs: call-docker-build-fastchat
-
-  call-docker-build-fastchat-api:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
-    with:
-      registry-github-enable: false
-      registry-repo-name: fastchat-api
-      tags: |
-        type=schedule
-        type=ref,event=branch
-        type=semver,pattern={{version}}
-      dockerfile: Dockerfile.api
-      build-args: |
-        FROM_IMAGE=${{ needs.call-docker-build-fastchat.outputs.primary-image }}
-      registry-readme: README-docker.md
-      platforms: linux/amd64,linux/arm64/v8
-    secrets: inherit
-    needs: call-docker-build-fastchat
-    
-  call-docker-build-fastchat-gradio:
-    uses: localagi/ai-dedicated-workflows/.github/workflows/operation-docker-build-publish.yml@v1
-    with:
-      registry-github-enable: false
-      registry-repo-name: fastchat-gradio
-      tags: |
-        type=schedule
-        type=ref,event=branch
-        type=semver,pattern={{version}}
-      dockerfile: Dockerfile.gradio
-      build-args: |
-        FROM_IMAGE=${{ needs.call-docker-build-fastchat.outputs.primary-image }}
-      registry-readme: README-docker.md
-      platforms: linux/amd64,linux/arm64/v8
-    secrets: inherit
-    needs: call-docker-build-fastchat

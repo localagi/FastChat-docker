@@ -2,23 +2,14 @@ version: "3.8"
 services:
 
   fastchat-controller:
-    image: localagi/fastchat-controller:${FASTCHAT_VERSION:-main}
-    environment:
-      FASTCHAT_CONTROLLER_HOST: "0.0.0.0"
+    image: localagi/fastchat:${FASTCHAT_VERSION:-main}
+    command: "/fastchat/entrypoint.sh fastchat.serve.controller --host ${FASTCHAT_CONTROLLER_HOST} --port ${FASTCHAT_CONTROLLER_PORT}"
 
   fastchat-worker:
-    image: localagi/fastchat-worker:${FASTCHAT_VERSION:-main}
-    environment:
-      FASTCHAT_WORKER_HOST: "0.0.0.0"
-      FASTCHAT_WORKER_ADDRESS: http://fastchat-worker:21002
-      FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
-      FASTCHAT_DEVICE: "cpu"
-      MODEL_PATH: lmsys/fastchat-t5-3b-v1.0 
-      # or to use a local model:
-      # MODEL_PATH: "/models/fastchat-t5-3b-v1.0"
-  ## use volumes to mount local models and use MODEL_PATH to provide an absolute path from internal /models      
-  # volumes:
-  #   - /path/to/local/models:/models
+    image: localagi/fastchat:${FASTCHAT_VERSION:-main}
+    command: /fastchat/entrypoint.sh fastchat.serve.model_worker --host ${FASTCHAT_WORKER_HOST} --port ${FASTCHAT_WORKER_PORT} --controller-address ${FASTCHAT_CONTROLLER_ADDRESS} --worker-address ${FASTCHAT_WORKER_ADDRESS} --model-path ${MODEL_PATH} --num-gpus ${FASTCHAT_GPU_COUNT} --device ${FASTCHAT_DEVICE}
+    volumes:
+      - ${LOCAL_MODEL_DIR:-./models}:/models
     deploy:
       resources:
         reservations:
@@ -31,21 +22,19 @@ services:
       - fastchat-controller
       
   fastchat-api:
-    image: localagi/fastchat-api:${FASTCHAT_VERSION:-main}
+    image: localagi/fastchat:${FASTCHAT_VERSION:-main}
+    command: /fastchat/entrypoint.sh fastchat.serve.openai_api_server --host ${FASTCHAT_API_HOST} --port ${FASTCHAT_API_PORT} --controller-address ${FASTCHAT_CONTROLLER_ADDRESS}
     environment:
       FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
     ports:
-      - "7500:7500"
+      - "${FASTCHAT_API_PORT}:${FASTCHAT_API_PORT}"
     depends_on:
       - fastchat-controller
 
   fastchat-gradio:
-    image: localagi/fastchat-gradio:${FASTCHAT_VERSION:-main}
-    environment:
-      FASTCHAT_GRADIO_HOST: 0.0.0.0
-      FASTCHAT_CONTROLLER_ADDRESS: http://fastchat-controller:21001
-      FASTCHAT_GRADIO_MODEL_LIST_MODE: reload
+    image: localagi/fastchat:${FASTCHAT_VERSION:-main}
+    command: /fastchat/entrypoint.sh fastchat.serve.gradio_web_server --host ${FASTCHAT_GRADIO_HOST} --port ${FASTCHAT_GRADIO_PORT} --controller-url ${FASTCHAT_CONTROLLER_ADDRESS} --model-list-mode ${FASTCHAT_GRADIO_MODEL_LIST_MODE}
     ports:
-      - "3000:3000"
+      - "${FASTCHAT_GRADIO_PORT}:${FASTCHAT_GRADIO_PORT}"
     depends_on:
       - fastchat-controller   

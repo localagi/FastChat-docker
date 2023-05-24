@@ -1,7 +1,0 @@
-ARG FROM_IMAGE
-FROM ${FROM_IMAGE}
-
-EXPOSE $FASTCHAT_API_PORT
-
-ENTRYPOINT ["/fastchat/entrypoint.sh", "fastchat.serve.openai_api_server"]
-CMD ["--host","${FASTCHAT_API_HOST}","--port","${FASTCHAT_API_PORT}","--controller-address","${FASTCHAT_CONTROLLER_ADDRESS}"]

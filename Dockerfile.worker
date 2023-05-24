@@ -1,7 +1,0 @@
-ARG FROM_IMAGE
-FROM ${FROM_IMAGE}
-
-EXPOSE $FASTCHAT_WORKER_PORT
-
-ENTRYPOINT ["/fastchat/entrypoint.sh", "fastchat.serve.model_worker"]
-CMD ["--host","${FASTCHAT_WORKER_HOST}","--port","${FASTCHAT_WORKER_PORT}","--controller-address","${FASTCHAT_CONTROLLER_ADDRESS}","--worker-address","${FASTCHAT_WORKER_ADDRESS}","--model-path","${MODEL_PATH}","--num-gpus","${FASTCHAT_GPU_COUNT}","--device","${FASTCHAT_DEVICE}"]
