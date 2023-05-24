@@ -11,7 +11,7 @@ Easy setup. Compatible. Tweakable. Scaleable.
 #### Supported versions
 Containers follow the version scheme of the parent project
 
-`main` (default), `v0.2.9`, `v0.2.5`, etc.
+`main` (default), `v0.2.9`, etc.
 
 See [Releases](../../releases)
 
